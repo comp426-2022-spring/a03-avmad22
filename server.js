@@ -66,7 +66,7 @@ app.get('/app/flip', (req, res) => {
 app.get('/app/flips/:number', (req, res) => {
     let flips = coinFlips(req.params.number)
     let count = countFlips(flips);
-    res.status(200).json({'flip': flip, 'count': count})
+    res.status(200).json({'raw': flip, 'summary': count})
 })
 
 /*
@@ -77,12 +77,12 @@ app.get('/app/countflips/:array', (req, res) => {
 */
 app.get('/app/flipcoin/call/heads', (req, res) => {
     let flipsCoinheads=flipACoin("heads")
-    res.status(200).json({'call': "heads", 'flip': flipsCoinheads.flip, 'result': flipsCoinheads.result})
+    res.status(200).json(flipsCoinheads)
 })
 
 app.get('/app/flipcoin/call/tails', (req, res) => {
     let flipsCointails=flipACoin("tails")
-    res.status(200).json({'call': "tails", 'flip': flipsCointails.flip, 'result': flipsCointails.result})
+    res.status(200).json(flipsCointails)
 })
 
 // Default response for any other request
