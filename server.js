@@ -5,7 +5,7 @@ const app = express()
 // Start an app server
 const args = require('minimist')(process.argv.slice(2))
 args['port']
-const port = args.port || process.env.PORT || 5555
+const port = args.port || process.env.PORT || 5000
 const server = app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%',port))
 });
@@ -17,6 +17,33 @@ app.get('/app/', (req, res) => {
         res.statusMessage = 'OK';
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end(res.statusCode+ ' ' +res.statusMessage)
+});
+
+
+
+// works
+app.get('/app/flip', (req, res) => {
+    res.status(200).json({ 'flip': coinFlip()})
+}) 
+  
+app.get('/app/flips/:number', (req, res) => {
+    let flips = coinFlips(req.params.number)
+    res.status(200).json({ 'raw' : flips, 'summary' : countFlips(flips) })
+})
+
+app.get('/app/flip/call/heads', (req, res) => {
+    let flipsCoinheads=flipACoin("heads")
+    res.status(200).json(flipsCoinheads)
+})
+
+app.get('/app/flip/call/tails', (req, res) => {
+    let flipsCointails=flipACoin("tails")
+    res.status(200).json(flipsCointails)
+})
+
+// Default response for any other request
+app.use(function(req, res){
+    res.status(404).send('404 NOT FOUND')
 });
 
 
@@ -57,29 +84,3 @@ function flipACoin(call) {
     } else {result="lose";}
     return {call: call, flip: side, result: "win"}
 }
-
-// works
-app.get('/app/flip', (req, res) => {
-    res.status(200).json({ 'flip': coinFlip()})
-}) 
-  
-app.get('/app/flips/:number([0-9]{1,3})', (req, res) => {
-    let flips = coinFlips(req.params.number)
-    let count = countFlips(flips);
-    res.status(200).json({"raw":flips, "summary":count})
-})
-
-app.get('/app/flip/call/heads', (req, res) => {
-    let flipsCoinheads=flipACoin("heads")
-    res.status(200).json(flipsCoinheads)
-})
-
-app.get('/app/flip/call/tails', (req, res) => {
-    let flipsCointails=flipACoin("tails")
-    res.status(200).json(flipsCointails)
-})
-
-// Default response for any other request
-app.use(function(req, res){
-    res.status(404).send('404 NOT FOUND')
-});
