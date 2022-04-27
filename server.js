@@ -13,8 +13,16 @@ app.get('/app', (req, res) => {
     res.type('text/plain')
 })
 
-app.get('/app/echo/:number', (req, res) => {
-    res.status(200).json({'message': req.params.number})
+function coinFlip() {
+ 
+    let num = Math.round(Math.random())%2;
+    
+    if(num==0) {return "heads"};
+    return "tails";
+  }
+
+app.get('/app/flip/', (req, res) => {
+    res.status(200).json({'flip': coinFlip()})
 })
 
 app.use(function(req, res) {
