@@ -79,3 +79,10 @@ app.get('/app/countflips/:array', (req, res) => {
     res.status(200).json({'count': count})
 })
 
+app.get('/app/flipcoin/heads', (req, res) => {
+    res.status(200).json({'call': "heads", 'result': flipACoin(call)})
+})
+
+app.get('/app/flipcoin/tails', (req, res) => {
+    res.status(200).json({'call': "tails", 'result': flipACoin(call)})
+})
