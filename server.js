@@ -3,9 +3,11 @@ const app = express()
 
 
 // Start an app server
-let HTTP_PORT=5000
-const server = app.listen(HTTP_PORT, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT%',HTTP_PORT))
+const args = require('minimist')(process.argv.slice(2))
+args['port']
+const port = args.port || process.env.PORT || 5000
+const server = app.listen(port, () => {
+    console.log('App listening on port %PORT%'.replace('%PORT%',port))
 });
 
 // Default response for any other request
@@ -40,11 +42,33 @@ function coinFlips(flips) {
     return arr;
 }
 
+function countFlips(array) {
+    let heads =0;
+    let tails=0;
+    for(let i=0; i < array.length; i++) {
+      if(array[i]=="heads") {
+        heads++;
+      } else {
+        tails++;
+      }
+    }
+    return "{ heads: " + heads + ", tails: " + tails + " }"
+  }
+
+function flipACoin(call) {
+    let side = coinFlip();
+    let result = "";
+    if(side==call) {
+      result = "win";
+    } else {result="lose";}
+    return {call: call, flip: side, result: "win"}
+  }
+
+app.get('/app/flip', (req, res) => {
+    res.status(200).json({ 'flip': coinFlip})
+}) 
+  
 app.get('/app/flips/:number', (req, res) => {
     res.status(200).json({'flip': coinFlips(req.params.number)})
 })
 
-app.use(function(req, res) {
-    res.status(404).end("Endpoint does not exist")
-    res.type("text/plain")
-})
