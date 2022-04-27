@@ -60,10 +60,10 @@ function flipACoin(call) {
 
 // works
 app.get('/app/flip', (req, res) => {
-    res.status(200).json({ 'flip': coinFlip})
+    res.status(200).json({ 'flip': coinFlip()})
 }) 
   
-app.get('/app/flips/:number[0-9]{1,3}', (req, res) => {
+app.get('/app/flips/:number([0-9]{1,3}', (req, res) => {
     let flips = coinFlips(req.params.number)
     let count = countFlips(flips);
     res.status(200).json({"raw": flips, "summary": count})
