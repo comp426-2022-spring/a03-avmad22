@@ -58,6 +58,7 @@ function flipACoin(call) {
     return {call: call, flip: side, result: "win"}
 }
 
+// works
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip})
 }) 
@@ -68,11 +69,12 @@ app.get('/app/flips/:number', (req, res) => {
     res.status(200).json({'flip': flip, 'count': count})
 })
 
+/*
 app.get('/app/countflips/:array', (req, res) => {
     let count = countFlips(req.params.array);
     res.status(200).json({'count': count})
 })
-
+*/
 app.get('/app/flipcoin/heads', (req, res) => {
     let flipsCoin=flipACoin(call)
     res.status(200).json({'call': "heads", 'flip': flipsCoin.flip, 'result': flipsCoin.result})
