@@ -80,9 +80,11 @@ app.get('/app/countflips/:array', (req, res) => {
 })
 
 app.get('/app/flipcoin/heads', (req, res) => {
-    res.status(200).json({'call': "heads", 'result': flipACoin(call)})
+    let flipsCoin=flipACoin(call)
+    res.status(200).json({'call': "heads", 'flip': flipsCoin.flip, 'result': flipsCoin.result})
 })
 
 app.get('/app/flipcoin/tails', (req, res) => {
-    res.status(200).json({'call': "tails", 'result': flipACoin(call)})
+    let flipsCoin=flipACoin(call)
+    res.status(200).json({'call': "tails", 'flip': flipsCoin.flip, 'result': flipsCoin.result})
 })
