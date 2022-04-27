@@ -74,3 +74,8 @@ app.get('/app/flips/:number', (req, res) => {
     res.status(200).json({'flip': flip, 'count': count})
 })
 
+app.get('/app/countflips/:array', (req, res) => {
+    let count = countFlips(req.params.array);
+    res.status(200).json({'count': count})
+})
+
