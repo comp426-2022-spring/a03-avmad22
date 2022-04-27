@@ -23,8 +23,9 @@ app.get('/app/', (req, res) => {
         res.statusMessage = 'OK';
         res.writeHead( res.statusCode, { 'Content-Type' : 'text/plain' });
         res.end(res.statusCode+ ' ' +res.statusMessage)
-    });
+});
     
+
 
 function coinFlip() {
  
@@ -53,7 +54,7 @@ function countFlips(array) {
       }
     }
     return "{ heads: " + heads + ", tails: " + tails + " }"
-  }
+}
 
 function flipACoin(call) {
     let side = coinFlip();
@@ -62,7 +63,7 @@ function flipACoin(call) {
       result = "win";
     } else {result="lose";}
     return {call: call, flip: side, result: "win"}
-  }
+}
 
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip})
