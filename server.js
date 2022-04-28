@@ -1,4 +1,4 @@
-const express = require("express")
+const express = require('express')
 const app = express()
 
 
@@ -28,7 +28,7 @@ app.get('/app/flip', (req, res) => {
   
 app.get('/app/flips/:number', (req, res) => {
     let fliparr = coinFlips(parseInt(req.params.number))
-    res.status(200).json({ 'raw' : fliparr, 'summary' : countFlips(flipsarr) })
+    res.status(200).json({ 'raw' : fliparr, 'summary' : countFlips(fliparr) })
 })
 
 app.get('/app/flip/call/heads', (req, res) => {
