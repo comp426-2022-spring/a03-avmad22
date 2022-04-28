@@ -24,22 +24,22 @@ app.get('/app/', (req, res) => {
 // works
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip()})
-}) 
+}); 
   
 app.get('/app/flips/:number', (req, res) => {
-    let flips = coinFlips(req.params.number)
-    res.status(200).json({ 'raw' : flips, 'summary' : countFlips(flips) })
-})
+    let fliparr = coinFlips(req.params.number)
+    res.status(200).json({ 'raw' : fliparr, 'summary' : countFlips(flips) })
+});
 
 app.get('/app/flip/call/heads', (req, res) => {
     let flipsCoinheads=flipACoin("heads")
     res.status(200).json(flipsCoinheads)
-})
+});
 
 app.get('/app/flip/call/tails', (req, res) => {
     let flipsCointails=flipACoin("tails")
     res.status(200).json(flipsCointails)
-})
+});
 
 // Default response for any other request
 app.use(function(req, res){
