@@ -21,7 +21,7 @@ app.get('/app/', (req, res) => {
 
 
 
-// works
+
 app.get('/app/flip', (req, res) => {
     res.status(200).json({ 'flip': coinFlip()})
 }); 
