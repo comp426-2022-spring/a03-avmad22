@@ -28,8 +28,8 @@ app.get('/app/flip', (req, res) => {
   
 app.get('/app/flips/:number', (req, res) => {
     let fliparr = coinFlips(parseInt(req.params.number))
-    res.status(200).json({ 'raw' : fliparr, 'summary' : countFlips(flips) })
-});
+    res.status(200).json({ 'raw' : fliparr, 'summary' : countFlips(flipsarr) })
+})
 
 app.get('/app/flip/call/heads', (req, res) => {
     let flipsCoinheads=flipACoin("heads")
