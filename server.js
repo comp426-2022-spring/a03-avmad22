@@ -64,8 +64,6 @@ function coinFlips(flips) {
     return arr;
 }
 
-// fix
-
 function countFlips(array) {
     let heads =0;
     let tails=0;
