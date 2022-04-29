@@ -27,6 +27,7 @@ app.get('/app/flip/', (req, res) => {
     res.status(200).json({'flip' : flip})
 });
 
+// autograder
 app.get('/app/flips/:number/', (req, res) => {
     const flips = coinFlips(req.params.number)
     const count = countFlips(flips)
