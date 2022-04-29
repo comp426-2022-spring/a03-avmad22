@@ -80,7 +80,7 @@ function countFlips(array) {
     } else if (tails==0) {
         return "{ heads: " + heads + " }"
     } else {
-        return "{ heads: " + heads + ", tails: " + tails + " }"
+        return {"heads":heads,"tails":tails}
     }
     
 }
